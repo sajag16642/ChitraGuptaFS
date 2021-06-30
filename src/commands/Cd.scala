@@ -39,7 +39,9 @@ class Cd(dir: String) extends Command{
     val tokens: List[String] = path.substring(1).split(Directory.SEPARATOR).toList
 
     val newTokens = collapse(tokens, List())
-    findEntryHelper(root, newTokens)
+
+    if(newTokens == null) null
+    else findEntryHelper(root, newTokens)
   }
 
   override def apply(state: State): State = {
