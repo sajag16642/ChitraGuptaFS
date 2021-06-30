@@ -25,8 +25,21 @@ class Cd(dir: String) extends Command{
       }
     }
 
+    @tailrec
+    def collapse(path: List[String], result: List[String]): List[String] = {
+      if(path.isEmpty) result
+      else if(".".equals(path.head)) collapse(path.tail, result)
+      else if("..".equals(path.head)){
+        if(result.isEmpty) null
+        else collapse(path.tail, result.init)
+      }
+      else collapse(path.tail, result:+path.head)
+    }
+
     val tokens: List[String] = path.substring(1).split(Directory.SEPARATOR).toList
-    findEntryHelper(root, tokens)
+
+    val newTokens = collapse(tokens, List())
+    findEntryHelper(root, newTokens)
   }
 
   override def apply(state: State): State = {

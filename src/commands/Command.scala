@@ -17,14 +17,9 @@ object Command {
   val TOUCH = "touch"
   val CD = "cd"
 
-  def emptyCommand: Command = new Command {
-    override def apply(state: State): State = state
-  }
+  def emptyCommand: Command = (state: State) => state
 
-  def incompleteCommand(name: String): Command = new Command {
-    override def apply(state: State): State =
-      state.setMessage(name+" :too few arguments!!")
-  }
+  def incompleteCommand(name: String): Command = (state: State) => state.setMessage(name + " :too few arguments!!")
 
   def from(input: String): Command = {
     val tokens: Array[String] = input.split(" ")
