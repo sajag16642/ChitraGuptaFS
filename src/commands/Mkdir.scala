@@ -35,7 +35,6 @@ class Mkdir(name: String) extends Command {
     val newDir = Directory.empty(fullPath, name)
     val newRoot = updateStructure(state.root, allDirsInPath, newDir)
     val newWd = newRoot.findDescendant(allDirsInPath)
-
     State(newRoot, newWd)
   }
 }
