@@ -13,6 +13,7 @@ trait Command {
 object Command {
   val MKDIR = "mkdir"
   val LS = "ls"
+  val PWD = "pwd"
 
   def emptyCommand: Command = new Command {
     override def apply(state: State): State = state
@@ -33,6 +34,9 @@ object Command {
       }
       else if (LS.equals(tokens(0))){
         new Ls
+      }
+      else if (PWD.equals(tokens(0))){
+        new Pwd
       }
       else new Default
     }
