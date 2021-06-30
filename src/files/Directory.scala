@@ -8,9 +8,11 @@ import scala.annotation.tailrec
  */
 class Directory(override val parentPath: String, override val name: String, val contents: List[DirEntry])
   extends DirEntry(parentPath, name) {
-
   def hasEntry(name: String): Boolean =
     findEntry(name) != null
+
+
+  def isRoot: Boolean = parentPath.isEmpty
 
   def getAllFoldersInPath: List[String] = {
     println(path)
@@ -39,11 +41,13 @@ class Directory(override val parentPath: String, override val name: String, val 
     new Directory(parentPath, name, contents.filter(e => !e.name.equals(entryName)) :+ newEntry)
 
   override def asDirectory: Directory = this
-
   override def asFile: File =
     throw new FileSystemException("A directory cannot be converted to a file!!")
 
   override def getType: String = "Directory"
+
+  override def isDirectory: Boolean = true
+  override def isFile: Boolean = false
 }
 
 object Directory {
