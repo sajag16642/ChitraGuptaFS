@@ -1,6 +1,6 @@
-# ChitraGuptaFS
+# FalconFS
 
-ChitraGuptaFS is a command line based in memory filesystem. Built from scratch(Just for FUN!!).
+FalconFS is a command line based in memory filesystem. Built from scratch(Just for FUN!!).
 
 ## Available commands
  * mkdir: create a new directory
